@@ -1,0 +1,7 @@
+* Crawler API
+*** TODO Provide better defaults handling
+* Network.Crawler.Types
+*** TODO Consider using ST instead of MonadState
+*** TODO Use lenses
+* Network.Crawler.Actions
+*** TODO deduplicate request/response and state management code
