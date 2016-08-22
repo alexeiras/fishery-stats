@@ -1,7 +1,9 @@
 * Crawler API
 *** TODO Provide better defaults handling
+*** TODO Refactor scraping related functions
 * Network.Crawler.Types
 *** TODO Consider using ST instead of MonadState
 *** TODO Use lenses
+*** TODO Keep the whole response in the state
 * Network.Crawler.Actions
 *** TODO deduplicate request/response and state management code

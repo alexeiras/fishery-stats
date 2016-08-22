@@ -1,9 +1,10 @@
 module Network.Crawler
-    ( Crawler
-    , runCrawler
+    ( Crawler()
+    , withCrawler
     , defaultManagerSettings
     , URL
     , FormParam(..)
+    , FormValue(..)
     -- * Actions
     , visit
     , submit
