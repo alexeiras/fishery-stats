@@ -1,10 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards   #-}
 module FisheryStats where
 
 import           Control.Monad
 import           Control.Monad.IO.Class (liftIO)
 import qualified Data.ByteString        as S
 import           Data.Char
+import           Data.List              (intersect)
 import qualified Data.Text              as T
 import           Data.Time
 import           Data.Time.Clock.POSIX
@@ -18,13 +20,22 @@ baseUrl = "http://www.pescadegalicia.gal"
 dbConn :: IO Connection
 dbConn = connect defaultConnectInfo { connectHost = "192.168.99.100" }
 
-crawl :: Day -> Day -> IO ()
-crawl from to = withCrawler defaultManagerSettings baseUrl $ do
+data Params = Params
+    { from    :: Day
+    , to      :: Day
+    , species :: [String]
+    }
+
+crawl :: Params -> IO ()
+crawl Params{..} = withCrawler defaultManagerSettings baseUrl $ do
     visit "/estadisticas.html"
     visit "/estadisticas/datos_estadisticas.asp?pub=1"
     let dates = map renderFormValue [from .. to]
-    species <- fetchSpecies
-    forM_ species $
+    allSpecies <- fetchSpecies
+    let species' = case species of
+            [] -> allSpecies
+            _  -> allSpecies `intersect` map renderFormValue species
+    forM_ species' $
         \s -> do
             markets <- fetchMarkets s
             let params = sequence [[s], markets, dates]

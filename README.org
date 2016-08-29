@@ -1,9 +1,12 @@
-* Crawler API
-*** TODO Provide better defaults handling
-*** TODO Refactor scraping related functions
+* Crawler API/CLI
+** TODO Provide better defaults handling
+** TODO Refactor scraping related functions and types (e.g.: Crawler [ByteString])
+** TODO Wrap a scraped record in an ADT
+** TODO Use System.Environment getEnv instead of hardcoded persistence config
 * Network.Crawler.Types
-*** TODO Consider using ST instead of MonadState
-*** TODO Use lenses
-*** TODO Keep the whole response in the state
+** TODO Consider using ST instead of MonadState
+** TODO Use lenses
+** TODO Keep the whole response in the state
 * Network.Crawler.Actions
-*** TODO deduplicate request/response and state management code
+** TODO deduplicate request/response and state management code
+** TODO allow setting expectations on what an action (set of actions) should produce
